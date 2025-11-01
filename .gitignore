@@ -39,3 +39,8 @@
 
 # debug information files
 *.dwo
+
+# config files
+/cmake-build-debug/
+/.claude/
+/.idea/
