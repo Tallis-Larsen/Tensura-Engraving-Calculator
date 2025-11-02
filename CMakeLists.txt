@@ -21,6 +21,3 @@ FetchContent_MakeAvailable(ftxui)
 
 target_link_libraries(engraving-calculator PRIVATE ftxui::component ftxui::dom)
 target_include_directories(engraving-calculator PRIVATE include)
-
-
-

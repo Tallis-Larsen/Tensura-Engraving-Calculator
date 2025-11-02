@@ -1,5 +1,5 @@
-#include <ui.h>
+#include <ui.hpp>
 
 int main() {
-    som();
+    UI::start(main);
 }
