@@ -13,6 +13,20 @@ enum Rarity {
     VERY_RARE
 };
 
+inline std::string rarityToString(Rarity rarity) {
+    switch (rarity) {
+        case COMMON:
+            return "COMMON";
+        case UNCOMMON:
+            return "UNCOMMON";
+        case RARE:
+            return "RARE";
+        case VERY_RARE:
+            return "VERY RARE";
+    }
+    return "ERROR: Bad rarity value";
+}
+
 namespace Config {
     inline std::vector<std::pair<Rarity, std::string> > weaponEngravings = {
         std::pair<Rarity, std::string>(COMMON, "Swift"),
