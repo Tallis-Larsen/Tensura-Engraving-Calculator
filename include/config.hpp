@@ -2,8 +2,8 @@
 
 enum SelectedTab {
     WEAPON,
-    ARMOR_NON_HELMET,
-    ARMOR_HELMET
+    ARMOR,
+    HELMET
 };
 
 enum Rarity {
@@ -11,6 +11,19 @@ enum Rarity {
     UNCOMMON,
     RARE,
     VERY_RARE
+};
+
+enum Tier {
+    UNIQUE,
+    LEGENDARY,
+    GOD
+};
+
+struct Engraving {
+    Rarity rarity;
+    std::string name;
+    int level;
+    int maxLevel = 1;
 };
 
 inline std::string rarityToString(Rarity rarity) {
@@ -28,53 +41,53 @@ inline std::string rarityToString(Rarity rarity) {
 }
 
 namespace Config {
-    inline std::vector<std::pair<Rarity, std::string> > weaponEngravings = {
-        std::pair<Rarity, std::string>(COMMON, "Swift"),
-        std::pair<Rarity, std::string>(COMMON, "Sturdy"),
-        std::pair<Rarity, std::string>(COMMON, "Crushing"),
-        std::pair<Rarity, std::string>(UNCOMMON, "Magic Weapon"),
-        std::pair<Rarity, std::string>(UNCOMMON, "Holy Weapon"),
-        std::pair<Rarity, std::string>(UNCOMMON, "Slotting I"),
-        std::pair<Rarity, std::string>(RARE, "Energy Steal"),
-        std::pair<Rarity, std::string>(RARE, "Slotting II"),
-        std::pair<Rarity, std::string>(RARE, "Barrier Piercing"),
-        std::pair<Rarity, std::string>(VERY_RARE, "Severance"),
-        std::pair<Rarity, std::string>(VERY_RARE, "Soul Eater"),
-        std::pair<Rarity, std::string>(VERY_RARE, "Slotting III")
+    inline std::vector<Engraving> weaponEngravings = {
+        {COMMON, "Swift", 1},
+        {COMMON, "Sturdy", 1},
+        {COMMON, "Crushing", 1},
+        {UNCOMMON, "Magic Weapon", 1},
+        {UNCOMMON, "Holy Weapon", 1},
+        {UNCOMMON, "Slotting", 1, 3},
+        {RARE, "Energy Steal", 1},
+        {RARE, "Slotting", 2, 3},
+        {RARE, "Barrier Piercing", 1},
+        {VERY_RARE, "Severance", 1},
+        {VERY_RARE, "Soul Eater", 1},
+        {VERY_RARE, "Slotting", 3, 3}
     };
 
-    inline std::vector<std::pair<Rarity, std::string> > armorEngravings = {
-        std::pair<Rarity, std::string>(COMMON, "Sturdy"),
-        std::pair<Rarity, std::string>(UNCOMMON, "Elemental Boost I"),
-        std::pair<Rarity, std::string>(UNCOMMON, "Elemental Resistance I"),
-        std::pair<Rarity, std::string>(VERY_RARE, "Elemental Boost II"),
-        std::pair<Rarity, std::string>(VERY_RARE, "Elemental Resistance II")
+    inline std::vector<Engraving> armorEngravings = {
+        {COMMON, "Sturdy", 1},
+        {UNCOMMON, "Elemental Boost", 1, 2},
+        {UNCOMMON, "Elemental Resistance", 1, 2},
+        {VERY_RARE, "Elemental Boost", 2, 2},
+        {VERY_RARE, "Elemental Resistance", 2, 2}
     };
 
-    inline std::vector<std::pair<Rarity, std::string> > helmetEngravings = {
-        std::pair<Rarity, std::string>(COMMON, "Sturdy"),
-        std::pair<Rarity, std::string>(UNCOMMON, "Breathing Support"),
-        std::pair<Rarity, std::string>(UNCOMMON, "Elemental Boost I"),
-        std::pair<Rarity, std::string>(UNCOMMON, "Elemental Resistance I"),
-        std::pair<Rarity, std::string>(VERY_RARE, "Elemental Boost II"),
-        std::pair<Rarity, std::string>(VERY_RARE, "Elemental Resistance II")
+    inline std::vector<Engraving> helmetEngravings = {
+        {COMMON, "Sturdy", 1},
+        {UNCOMMON, "Breathing Support", 1},
+        {UNCOMMON, "Elemental Boost", 1, 2},
+        {UNCOMMON, "Elemental Resistance", 1, 2},
+        {VERY_RARE, "Elemental Boost", 2, 2},
+        {VERY_RARE, "Elemental Resistance", 2, 2}
     };
 
-    inline std::vector<std::pair<Rarity, int>> uniqueChances = {
-        std::pair<Rarity, int>(COMMON, 50),
-        std::pair<Rarity, int>(UNCOMMON, 30),
-        std::pair<Rarity, int>(RARE, 15),
-        std::pair<Rarity, int>(VERY_RARE, 5)
+    inline std::vector<std::pair<Rarity, float>> uniqueRarities = {
+        std::pair<Rarity, float>(COMMON, 0.50),
+        std::pair<Rarity, float>(UNCOMMON, 0.30),
+        std::pair<Rarity, float>(RARE, 0.15),
+        std::pair<Rarity, float>(VERY_RARE, 0.05)
     };
 
-    inline std::vector<std::pair<Rarity, int>> legendaryChances = {
-        std::pair<Rarity, int>(UNCOMMON, 40),
-        std::pair<Rarity, int>(RARE, 40),
-        std::pair<Rarity, int>(VERY_RARE, 20)
+    inline std::vector<std::pair<Rarity, float>> legendaryRarities = {
+        std::pair<Rarity, float>(UNCOMMON, 0.40),
+        std::pair<Rarity, float>(RARE, 0.40),
+        std::pair<Rarity, float>(VERY_RARE, 0.20)
     };
 
-    inline std::vector<std::pair<Rarity, int>> godChances = {
-        std::pair<Rarity, int>(RARE, 60),
-        std::pair<Rarity, int>(VERY_RARE, 40)
+    inline std::vector<std::pair<Rarity, float>> godRarities = {
+        std::pair<Rarity, float>(RARE, 0.60),
+        std::pair<Rarity, float>(VERY_RARE, 0.40)
     };
 }

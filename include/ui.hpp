@@ -9,6 +9,7 @@ public:
     UI() = delete;
 
     static void start(const std::function<void()> &calculateCallback);
+    static void updateProbabilities(const std::vector<std::pair<Engraving, float>>& newEngravingProbabilities, float noEngravingChance);
 
     inline static bool isEngraved = true;
     inline static int selectedTab;
@@ -21,14 +22,16 @@ private:
     static ftxui::Component render();
     static ftxui::Component createSeparatorComponent();
     static ftxui::Component createTextComponent(const std::string& text);
+    static std::string toRomanNumeral(Engraving engraving);
 
     inline static ftxui::ScreenInteractive screen = ftxui::ScreenInteractive::Fullscreen();
     inline static std::vector<ftxui::Component> renderedComponents;
+    inline static ftxui::Component engravingProbabilities;
     inline static ftxui::Component title = ftxui::Renderer([] {
-        return ftxui::vbox({ftxui::text("Tensura Engraving Calculator") | ftxui::bold | ftxui::center}) | ftxui::border;
+        return ftxui::vbox({ftxui::text("Tensura Engraving Calculator") | ftxui::bold | ftxui::color(ftxui::Color::Blue) | ftxui::center}) | ftxui::border;
     });
     inline static ftxui::Component probabilityHeader = ftxui::Renderer([] {
-        return ftxui::vbox({ftxui::text("Probabilities") | ftxui::bold | ftxui::center});
+        return ftxui::vbox({ftxui::text("Probabilities") | ftxui::bold | ftxui::color(ftxui::Color::Blue) | ftxui::center});
     });
     inline static std::vector<std::string> tabOptions = {"Weapon", "Armor", "Helmet"};
     inline static std::vector<std::string> tierOptions = {"Unique", "Legendary", "God"};
@@ -45,5 +48,4 @@ private:
     inline static ftxui::Component armorEngravings;
     inline static ftxui::Component helmetEngravings;
     inline static ftxui::Component calculate;
-    inline static ftxui::Element probabilities;
 };
