@@ -21,3 +21,14 @@ FetchContent_MakeAvailable(ftxui)
 
 target_link_libraries(engraving-calculator PRIVATE ftxui::component ftxui::dom)
 target_include_directories(engraving-calculator PRIVATE include)
+
+# Installation rules
+install(TARGETS engraving-calculator
+    RUNTIME DESTINATION bin
+)
+
+# Automatically install after build
+add_custom_command(TARGET engraving-calculator POST_BUILD
+    COMMAND ${CMAKE_COMMAND} --install ${CMAKE_BINARY_DIR} --prefix $ENV{HOME}/.local
+    COMMENT "Automatically installing to ~/.local/bin"
+)
