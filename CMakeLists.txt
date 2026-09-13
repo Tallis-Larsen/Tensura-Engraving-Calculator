@@ -13,10 +13,14 @@ add_executable(engraving-calculator
 
 # Gets the FTXUI library at compile time
 include(FetchContent)
-FetchContent_Declare(ftxui
-    GIT_REPOSITORY https://github.com/ArthurSonzogni/FTXUI.git
-    GIT_TAG v7.0.3
-)
+if(DEFINED ENV{FTXUI_SOURCE_DIR})
+  FetchContent_Declare(ftxui SOURCE_DIR $ENV{FTXUI_SOURCE_DIR})
+else()
+  FetchContent_Declare(ftxui
+        GIT_REPOSITORY https://github.com/ArthurSonzogni/FTXUI.git
+        GIT_TAG v7.0.3
+    )
+endif()
 FetchContent_MakeAvailable(ftxui)
 
 target_link_libraries(engraving-calculator PRIVATE ftxui::component ftxui::dom)
