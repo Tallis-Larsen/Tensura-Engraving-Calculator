@@ -23,6 +23,17 @@ else()
 endif()
 FetchContent_MakeAvailable(ftxui)
 
+# Gets the doctest library at compile time
+if(DEFINED ENV{DOCTEST_SOURCE_DIR})
+  FetchContent_Declare(doctest SOURCE_DIR $ENV{DOCTEST_SOURCE_DIR})
+else()
+  FetchContent_Declare(doctest
+        GIT_REPOSITORY https://github.com/doctest/doctest.git
+        GIT_TAG v2.4.12
+    )
+endif()
+FetchContent_MakeAvailable(doctest)
+
 target_link_libraries(engraving-calculator PRIVATE ftxui::component ftxui::dom)
 target_include_directories(engraving-calculator PRIVATE include)
 
